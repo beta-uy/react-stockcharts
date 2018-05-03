@@ -10,7 +10,7 @@ import {
   isNotDefined,
   strokeDashTypes,
   getStrokeDasharray,
-} from "react-stockcharts/lib/utils";
+} from "../utils";
 
 class AxisXCursor extends Component {
   constructor(props) {
