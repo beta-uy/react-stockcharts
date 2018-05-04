@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { functor } from "../utils";
@@ -18,21 +16,38 @@ class LabelAnnotation extends Component {
 		}
 	}
 	render() {
-		const { className, textAnchor, fontFamily, fontSize, opacity, rotate } = this.props;
+		const {
+			className,
+			textAnchor,
+			fontFamily,
+			fontSize,
+			fontWeight,
+			opacity,
+			rotate,
+		} = this.props;
 		const { xAccessor, xScale, yScale } = this.props;
 
 		const { xPos, yPos, fill, text, tooltip } = helper(this.props, xAccessor, xScale, yScale);
 
-		return (<g className={className}>
-			<title>{tooltip}</title>
-			<text x={xPos} y={yPos}
-				fontFamily={fontFamily} fontSize={fontSize}
-				fill={fill}
-				opacity={opacity}
-				transform={`rotate(${rotate}, ${xPos}, ${yPos})`}
-				onClick={this.handleClick}
-				textAnchor={textAnchor}>{text}</text>
-		</g>);
+		return (
+			<g className={className}>
+				<title>{tooltip}</title>
+				<text
+					x={xPos}
+					y={yPos}
+					fontFamily={fontFamily}
+					fontSize={fontSize}
+					fontWeight={fontWeight}
+					fill={fill}
+					opacity={opacity}
+					transform={`rotate(${rotate}, ${xPos}, ${yPos})`}
+					onClick={this.handleClick}
+					textAnchor={textAnchor}
+				>
+					{text}
+				</text>
+			</g>
+		);
 	}
 }
 
@@ -42,7 +57,10 @@ export function helper(props, xAccessor, xScale, yScale) {
 	const xFunc = functor(x);
 	const yFunc = functor(y);
 
-	const [xPos, yPos] = [xFunc({ xScale, xAccessor, datum, plotData }), yFunc({ yScale, datum, plotData })];
+	const [xPos, yPos] = [
+		xFunc({ xScale, xAccessor, datum, plotData }),
+		yFunc({ yScale, datum, plotData }),
+	];
 
 	return {
 		xPos,
@@ -66,14 +84,8 @@ LabelAnnotation.propTypes = {
 	xScale: PropTypes.func,
 	yScale: PropTypes.func,
 	datum: PropTypes.object,
-	x: PropTypes.oneOfType([
-		PropTypes.number,
-		PropTypes.func
-	]),
-	y: PropTypes.oneOfType([
-		PropTypes.number,
-		PropTypes.func
-	])
+	x: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+	y: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
 };
 
 export const defaultProps = {

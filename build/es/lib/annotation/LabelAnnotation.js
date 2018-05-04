@@ -47,6 +47,7 @@ var LabelAnnotation = function (_Component) {
 			    textAnchor = _props2.textAnchor,
 			    fontFamily = _props2.fontFamily,
 			    fontSize = _props2.fontSize,
+			    fontWeight = _props2.fontWeight,
 			    opacity = _props2.opacity,
 			    rotate = _props2.rotate;
 			var _props3 = this.props,
@@ -71,13 +72,18 @@ var LabelAnnotation = function (_Component) {
 				),
 				React.createElement(
 					"text",
-					{ x: xPos, y: yPos,
-						fontFamily: fontFamily, fontSize: fontSize,
+					{
+						x: xPos,
+						y: yPos,
+						fontFamily: fontFamily,
+						fontSize: fontSize,
+						fontWeight: fontWeight,
 						fill: fill,
 						opacity: opacity,
 						transform: "rotate(" + rotate + ", " + xPos + ", " + yPos + ")",
 						onClick: this.handleClick,
-						textAnchor: textAnchor },
+						textAnchor: textAnchor
+					},
 					text
 				)
 			);

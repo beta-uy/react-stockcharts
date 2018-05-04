@@ -13,14 +13,14 @@ import {
 	noop,
 	functor,
 	getLogger,
-} from "./utils";
+} from "react-stockcharts/build/lib/utils";
 
 /* eslint-disable no-unused-vars */
 import {
 	mouseBasedZoomAnchor,
 	lastVisibleItemBasedZoomAnchor,
 	rightDomainBasedZoomAnchor,
-} from "./utils/zoomBehavior";
+} from "react-stockcharts/build/lib/utils/zoomBehavior";
 /* eslint-enable no-unused-vars */
 
 import {
@@ -28,12 +28,12 @@ import {
 	getChartConfigWithUpdatedYScales,
 	getCurrentCharts,
 	getCurrentItem,
-} from "./utils/ChartDataUtil";
+} from "react-stockcharts/build/lib/utils/ChartDataUtil";
 
-import EventCapture from "./EventCapture";
+import EventCapture from "react-stockcharts/build/lib/EventCapture";
 
-import CanvasContainer from "./CanvasContainer";
-import evaluator from "./scale/evaluator";
+import CanvasContainer from "react-stockcharts/build/lib/CanvasContainer";
+import evaluator from "react-stockcharts/build/lib/scale/evaluator";
 
 const log = getLogger("ChartCanvas");
 
@@ -1142,9 +1142,9 @@ class ChartCanvas extends Component {
 							<rect x="0" y="0" width={dimensions.width} height={dimensions.height} />
 						</clipPath>
 						<linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-							<stop stopColor={gradientColor} stopOpacity="0.53" offset="0%" />
-							<stop stopColor={gradientColor} stopOpacity="0.11" offset="60%" />
-							<stop stopColor={gradientColor} stopOpacity="0" offset="100%" />
+							<stop stopColor="rgb(255,0,0)" stopOpacity="0.53" offset="0%" />
+							<stop stopColor="rgb(255,0,0)" stopOpacity="0.11" offset="60%" />
+							<stop stopColor="rgb(255,0,0)" stopOpacity="0" offset="100%" />
 						</linearGradient>
 						{chartConfig.map((each, idx) => (
 							<clipPath key={idx} id={`chart-area-clip-${each.id}`}>

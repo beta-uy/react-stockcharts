@@ -1,13 +1,12 @@
-
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { area as d3Area } from "d3-shape";
 
-import GenericChartComponent from "../GenericChartComponent";
-import { getAxisCanvas } from "../GenericComponent";
+import GenericChartComponent from "react-stockcharts/build/lib/GenericChartComponent";
+import { getAxisCanvas } from "react-stockcharts/build/lib/GenericComponent";
 
-import { hexToRGBA, isDefined, first, functor } from "../utils";
+import { hexToRGBA, isDefined, first, functor } from "react-stockcharts/build/lib/utils";
+import { constants } from "zlib";
 
 class AreaOnlySeries extends Component {
 	constructor(props) {
@@ -19,23 +18,34 @@ class AreaOnlySeries extends Component {
 		const { yAccessor, defined, base } = this.props;
 		const { fill, stroke, opacity, interpolation, canvasClip } = this.props;
 
-		const { xScale, chartConfig: { yScale }, plotData, xAccessor } = moreProps;
+		const {
+			xScale,
+			chartConfig: { yScale },
+			plotData,
+			xAccessor,
+		} = moreProps;
 
 		if (canvasClip) {
 			ctx.save();
 			canvasClip(ctx, moreProps);
 		}
 
-		ctx.fillStyle = hexToRGBA(fill, opacity);
+		// Gradient fill
+		const gradient = ctx.createLinearGradient(0, 0, 0, moreProps.chartConfig.height);
+		gradient.addColorStop(0.0, hexToRGBA(fill, 0.53));
+		gradient.addColorStop(0.8, hexToRGBA(fill, 0.11));
+		gradient.addColorStop(1.0, hexToRGBA(fill, 0));
+		ctx.fillStyle = gradient;
+
 		ctx.strokeStyle = stroke;
 
 		ctx.beginPath();
 		const newBase = functor(base);
 		const areaSeries = d3Area()
 			.defined(d => defined(yAccessor(d)))
-			.x((d) => Math.round(xScale(xAccessor(d))))
-			.y0((d) => newBase(yScale, d, moreProps))
-			.y1((d) => Math.round(yScale(yAccessor(d))))
+			.x(d => Math.round(xScale(xAccessor(d))))
+			.y0(d => newBase(yScale, d, moreProps))
+			.y1(d => Math.round(yScale(yAccessor(d))))
 			.context(ctx);
 
 		if (isDefined(interpolation)) {
@@ -52,14 +62,19 @@ class AreaOnlySeries extends Component {
 		const { yAccessor, defined, base, style } = this.props;
 		const { stroke, fill, className, opacity, interpolation } = this.props;
 
-		const { xScale, chartConfig: { yScale }, plotData, xAccessor } = moreProps;
+		const {
+			xScale,
+			chartConfig: { yScale },
+			plotData,
+			xAccessor,
+		} = moreProps;
 
 		const newBase = functor(base);
 		const areaSeries = d3Area()
 			.defined(d => defined(yAccessor(d)))
-			.x((d) => Math.round(xScale(xAccessor(d))))
-			.y0((d) => newBase(yScale, d, moreProps))
-			.y1((d) => Math.round(yScale(yAccessor(d))));
+			.x(d => Math.round(xScale(xAccessor(d))))
+			.y0(d => newBase(yScale, d, moreProps))
+			.y1(d => Math.round(yScale(yAccessor(d))));
 
 		if (isDefined(interpolation)) {
 			areaSeries.curve(interpolation);
@@ -97,12 +112,11 @@ AreaOnlySeries.propTypes = {
 	fill: PropTypes.string,
 	opacity: PropTypes.number,
 	defined: PropTypes.func,
-	base: PropTypes.oneOfType([
-		PropTypes.func, PropTypes.number
-	]),
+	base: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
 	interpolation: PropTypes.func,
 	canvasClip: PropTypes.func,
 	style: PropTypes.object,
+	gradient: PropTypes.bool,
 };
 
 AreaOnlySeries.defaultProps = {

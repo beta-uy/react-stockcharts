@@ -10,10 +10,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { area as d3Area } from "d3-shape";
 
-import GenericChartComponent from "../GenericChartComponent";
-import { getAxisCanvas } from "../GenericComponent";
+import GenericChartComponent from "react-stockcharts/build/lib/GenericChartComponent";
+import { getAxisCanvas } from "react-stockcharts/build/lib/GenericComponent";
 
-import { hexToRGBA, isDefined, first, functor } from "../utils";
+import { hexToRGBA, isDefined, first, functor } from "react-stockcharts/build/lib/utils";
+import { constants } from "zlib";
 
 var AreaOnlySeries = function (_Component) {
 	_inherits(AreaOnlySeries, _Component);
@@ -52,7 +53,13 @@ var AreaOnlySeries = function (_Component) {
 				canvasClip(ctx, moreProps);
 			}
 
-			ctx.fillStyle = hexToRGBA(fill, opacity);
+			// Gradient fill
+			var gradient = ctx.createLinearGradient(0, 0, 0, moreProps.chartConfig.height);
+			gradient.addColorStop(0.0, hexToRGBA(fill, 0.53));
+			gradient.addColorStop(0.8, hexToRGBA(fill, 0.11));
+			gradient.addColorStop(1.0, hexToRGBA(fill, 0));
+			ctx.fillStyle = gradient;
+
 			ctx.strokeStyle = stroke;
 
 			ctx.beginPath();
@@ -148,7 +155,8 @@ AreaOnlySeries.propTypes = {
 	base: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
 	interpolation: PropTypes.func,
 	canvasClip: PropTypes.func,
-	style: PropTypes.object
+	style: PropTypes.object,
+	gradient: PropTypes.bool
 };
 
 AreaOnlySeries.defaultProps = {

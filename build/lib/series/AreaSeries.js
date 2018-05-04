@@ -12,7 +12,7 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _LineSeries = require("./LineSeries");
+var _LineSeries = require("react-stockcharts/build/lib/series/LineSeries");
 
 var _LineSeries2 = _interopRequireDefault(_LineSeries);
 
@@ -20,7 +20,7 @@ var _AreaOnlySeries = require("./AreaOnlySeries");
 
 var _AreaOnlySeries2 = _interopRequireDefault(_AreaOnlySeries);
 
-var _utils = require("../utils");
+var _utils = require("react-stockcharts/build/lib/utils");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

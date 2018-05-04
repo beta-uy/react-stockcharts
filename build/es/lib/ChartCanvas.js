@@ -16,18 +16,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { extent as d3Extent, min, max } from "d3-array";
 
-import { head, last, isDefined, isNotDefined, clearCanvas, shallowEqual, identity, noop, functor, getLogger } from "./utils";
+import { head, last, isDefined, isNotDefined, clearCanvas, shallowEqual, identity, noop, functor, getLogger } from "react-stockcharts/build/lib/utils";
 
 /* eslint-disable no-unused-vars */
-import { mouseBasedZoomAnchor, lastVisibleItemBasedZoomAnchor, rightDomainBasedZoomAnchor } from "./utils/zoomBehavior";
+import { mouseBasedZoomAnchor, lastVisibleItemBasedZoomAnchor, rightDomainBasedZoomAnchor } from "react-stockcharts/build/lib/utils/zoomBehavior";
 /* eslint-enable no-unused-vars */
 
-import { getNewChartConfig, getChartConfigWithUpdatedYScales, getCurrentCharts, getCurrentItem } from "./utils/ChartDataUtil";
+import { getNewChartConfig, getChartConfigWithUpdatedYScales, getCurrentCharts, getCurrentItem } from "react-stockcharts/build/lib/utils/ChartDataUtil";
 
-import EventCapture from "./EventCapture";
+import EventCapture from "react-stockcharts/build/lib/EventCapture";
 
-import CanvasContainer from "./CanvasContainer";
-import evaluator from "./scale/evaluator";
+import CanvasContainer from "react-stockcharts/build/lib/CanvasContainer";
+import evaluator from "react-stockcharts/build/lib/scale/evaluator";
 
 var log = getLogger("ChartCanvas");
 
@@ -1228,9 +1228,9 @@ var ChartCanvas = function (_Component) {
 						React.createElement(
 							"linearGradient",
 							{ id: "gradient", x1: "0%", y1: "0%", x2: "0%", y2: "100%" },
-							React.createElement("stop", { stopColor: gradientColor, stopOpacity: "0.53", offset: "0%" }),
-							React.createElement("stop", { stopColor: gradientColor, stopOpacity: "0.11", offset: "60%" }),
-							React.createElement("stop", { stopColor: gradientColor, stopOpacity: "0", offset: "100%" })
+							React.createElement("stop", { stopColor: "rgb(255,0,0)", stopOpacity: "0.53", offset: "0%" }),
+							React.createElement("stop", { stopColor: "rgb(255,0,0)", stopOpacity: "0.11", offset: "60%" }),
+							React.createElement("stop", { stopColor: "rgb(255,0,0)", stopOpacity: "0", offset: "100%" })
 						),
 						chartConfig.map(function (each, idx) {
 							return React.createElement(

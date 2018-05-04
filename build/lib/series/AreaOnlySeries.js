@@ -16,13 +16,15 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _d3Shape = require("d3-shape");
 
-var _GenericChartComponent = require("../GenericChartComponent");
+var _GenericChartComponent = require("react-stockcharts/build/lib/GenericChartComponent");
 
 var _GenericChartComponent2 = _interopRequireDefault(_GenericChartComponent);
 
-var _GenericComponent = require("../GenericComponent");
+var _GenericComponent = require("react-stockcharts/build/lib/GenericComponent");
 
-var _utils = require("../utils");
+var _utils = require("react-stockcharts/build/lib/utils");
+
+var _zlib = require("zlib");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69,7 +71,13 @@ var AreaOnlySeries = function (_Component) {
 				canvasClip(ctx, moreProps);
 			}
 
-			ctx.fillStyle = (0, _utils.hexToRGBA)(fill, opacity);
+			// Gradient fill
+			var gradient = ctx.createLinearGradient(0, 0, 0, moreProps.chartConfig.height);
+			gradient.addColorStop(0.0, (0, _utils.hexToRGBA)(fill, 0.53));
+			gradient.addColorStop(0.8, (0, _utils.hexToRGBA)(fill, 0.11));
+			gradient.addColorStop(1.0, (0, _utils.hexToRGBA)(fill, 0));
+			ctx.fillStyle = gradient;
+
 			ctx.strokeStyle = stroke;
 
 			ctx.beginPath();
@@ -165,7 +173,8 @@ AreaOnlySeries.propTypes = {
 	base: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.number]),
 	interpolation: _propTypes2.default.func,
 	canvasClip: _propTypes2.default.func,
-	style: _propTypes2.default.object
+	style: _propTypes2.default.object,
+	gradient: _propTypes2.default.bool
 };
 
 AreaOnlySeries.defaultProps = {

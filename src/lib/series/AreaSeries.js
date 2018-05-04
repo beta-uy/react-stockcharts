@@ -1,10 +1,9 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 
-import LineSeries from "./LineSeries";
+import LineSeries from "react-stockcharts/build/lib/series/LineSeries";
 import AreaOnlySeries from "./AreaOnlySeries";
-import { strokeDashTypes } from "../utils";
+import { strokeDashTypes } from "react-stockcharts/build/lib/utils";
 
 function AreaSeries(props) {
 	const { yAccessor, baseAt } = props;

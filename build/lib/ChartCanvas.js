@@ -24,21 +24,21 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _d3Array = require("d3-array");
 
-var _utils = require("./utils");
+var _utils = require("react-stockcharts/build/lib/utils");
 
-var _zoomBehavior = require("./utils/zoomBehavior");
+var _zoomBehavior = require("react-stockcharts/build/lib/utils/zoomBehavior");
 
-var _ChartDataUtil = require("./utils/ChartDataUtil");
+var _ChartDataUtil = require("react-stockcharts/build/lib/utils/ChartDataUtil");
 
-var _EventCapture = require("./EventCapture");
+var _EventCapture = require("react-stockcharts/build/lib/EventCapture");
 
 var _EventCapture2 = _interopRequireDefault(_EventCapture);
 
-var _CanvasContainer = require("./CanvasContainer");
+var _CanvasContainer = require("react-stockcharts/build/lib/CanvasContainer");
 
 var _CanvasContainer2 = _interopRequireDefault(_CanvasContainer);
 
-var _evaluator2 = require("./scale/evaluator");
+var _evaluator2 = require("react-stockcharts/build/lib/scale/evaluator");
 
 var _evaluator3 = _interopRequireDefault(_evaluator2);
 
@@ -1251,9 +1251,9 @@ var ChartCanvas = function (_Component) {
 						_react2.default.createElement(
 							"linearGradient",
 							{ id: "gradient", x1: "0%", y1: "0%", x2: "0%", y2: "100%" },
-							_react2.default.createElement("stop", { stopColor: gradientColor, stopOpacity: "0.53", offset: "0%" }),
-							_react2.default.createElement("stop", { stopColor: gradientColor, stopOpacity: "0.11", offset: "60%" }),
-							_react2.default.createElement("stop", { stopColor: gradientColor, stopOpacity: "0", offset: "100%" })
+							_react2.default.createElement("stop", { stopColor: "rgb(255,0,0)", stopOpacity: "0.53", offset: "0%" }),
+							_react2.default.createElement("stop", { stopColor: "rgb(255,0,0)", stopOpacity: "0.11", offset: "60%" }),
+							_react2.default.createElement("stop", { stopColor: "rgb(255,0,0)", stopOpacity: "0", offset: "100%" })
 						),
 						chartConfig.map(function (each, idx) {
 							return _react2.default.createElement(

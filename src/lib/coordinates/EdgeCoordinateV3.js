@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 import { hexToRGBA, isDefined, getStrokeDasharray } from "../utils";
@@ -32,10 +30,10 @@ export function renderSVG(props) {
 		const path =
 			edge.orient === "left"
 				? `M0,0L0,${rectHeight}L${rectWidth},${rectHeight}L${rectWidth +
-					  arrowWidth},10L${rectWidth},0L0,0L0,0`
+						arrowWidth},10L${rectWidth},0L0,0L0,0`
 				: `M0,${arrowWidth}L${arrowWidth},${rectHeight}L${rectWidth +
-					  arrowWidth},${rectHeight}L${rectWidth +
-					  arrowWidth},0L${arrowWidth},0L0,${arrowWidth}`;
+						arrowWidth},${rectHeight}L${rectWidth +
+						arrowWidth},0L${arrowWidth},0L0,${arrowWidth}`;
 
 		coordinateBase =
 			edge.orient === "left" || edge.orient === "right" ? (
@@ -104,17 +102,9 @@ function helper(props) {
 		orient,
 		edgeAt,
 		hideLine,
-		lineStrokeDasharray
+		lineStrokeDasharray,
 	} = props;
-	const {
-		fill,
-		opacity,
-		fontFamily,
-		fontSize,
-		textFill,
-		lineStroke,
-		lineOpacity
-	} = props;
+	const { fill, opacity, fontFamily, fontSize, textFill, lineStroke, lineOpacity } = props;
 	const { stroke, strokeOpacity, strokeWidth } = props;
 	const { arrowWidth, rectWidth, rectHeight, rectRadius } = props;
 	const { x1, y1, x2, y2, dx } = props;
@@ -128,25 +118,17 @@ function helper(props) {
 		let edgeXRect, edgeYRect, edgeXText, edgeYText;
 
 		if (type === "horizontal") {
-			edgeXRect =
-				dx + (orient === "right" ? edgeAt + 1 : edgeAt - rectWidth - 1);
+			edgeXRect = dx + (orient === "right" ? edgeAt + 1 : edgeAt - rectWidth - 1);
 			edgeYRect = y1 - rectHeight / 2 - strokeWidth;
-			edgeXText =
-				dx +
-				(orient === "right"
-					? edgeAt + rectWidth / 2
-					: edgeAt - rectWidth / 2);
+			edgeXText = dx + (orient === "right" ? edgeAt + rectWidth / 2 : edgeAt - rectWidth / 2);
 			edgeYText = y1;
 		} else {
 			const dy = orient === "bottom" ? strokeWidth - 1 : -strokeWidth + 1;
 			edgeXRect = x1 - rectWidth / 2;
-			edgeYRect =
-				(orient === "bottom" ? edgeAt : edgeAt - rectHeight) + dy;
+			edgeYRect = (orient === "bottom" ? edgeAt : edgeAt - rectHeight) + dy;
 			edgeXText = x1;
 			edgeYText =
-				(orient === "bottom"
-					? edgeAt + rectHeight / 2
-					: edgeAt - rectHeight / 2) + dy;
+				(orient === "bottom" ? edgeAt + rectHeight / 2 : edgeAt - rectHeight / 2) + dy;
 		}
 
 		coordinateBase = {
@@ -160,7 +142,7 @@ function helper(props) {
 			arrowWidth,
 			stroke,
 			strokeOpacity,
-			strokeWidth
+			strokeWidth,
 		};
 		coordinate = {
 			edgeXText,
@@ -169,7 +151,7 @@ function helper(props) {
 			fontFamily,
 			fontSize,
 			textFill,
-			displayCoordinate
+			displayCoordinate,
 		};
 	}
 
@@ -182,14 +164,14 @@ function helper(props) {
 			x1,
 			y1,
 			x2,
-			y2
-		};
+			y2,
+		  };
 
 	return {
 		coordinateBase,
 		coordinate,
 		line,
-		orient
+		orient,
 	};
 }
 
@@ -219,21 +201,13 @@ export function drawOnCanvas(ctx, props) {
 
 	ctx.setLineDash([]);
 	if (isDefined(edge.coordinateBase)) {
-		const {
-			rectWidth,
-			rectHeight,
-			rectRadius,
-			arrowWidth
-		} = edge.coordinateBase;
+		const { rectWidth, rectHeight, rectRadius, arrowWidth } = edge.coordinateBase;
 
-		ctx.fillStyle = hexToRGBA(
-			edge.coordinateBase.fill,
-			edge.coordinateBase.opacity
-		);
+		ctx.fillStyle = hexToRGBA(edge.coordinateBase.fill, edge.coordinateBase.opacity);
 		if (isDefined(edge.coordinateBase.stroke)) {
 			ctx.strokeStyle = hexToRGBA(
 				edge.coordinateBase.stroke,
-				edge.coordinateBase.strokeOpacity
+				edge.coordinateBase.strokeOpacity,
 			);
 			ctx.lineWidth = edge.coordinateBase.strokeWidth;
 		}
@@ -262,7 +236,7 @@ export function drawOnCanvas(ctx, props) {
 		} else {
 			// console.error(x, y, rectWidth, rectHeight)
 			if (rectRadius) {
-				roundRect(ctx, x, y, rectWidth, rectHeight, 3);
+				roundRect(ctx, x, y, rectWidth, rectHeight, 6);
 			} else {
 				ctx.rect(x, y, rectWidth, rectHeight);
 			}
@@ -275,13 +249,11 @@ export function drawOnCanvas(ctx, props) {
 
 		ctx.fillStyle = edge.coordinate.textFill;
 		ctx.textAlign =
-			edge.coordinate.textAnchor === "middle"
-				? "center"
-				: edge.coordinate.textAnchor;
+			edge.coordinate.textAnchor === "middle" ? "center" : edge.coordinate.textAnchor;
 		ctx.fillText(
 			edge.coordinate.displayCoordinate,
 			edge.coordinate.edgeXText,
-			edge.coordinate.edgeYText
+			edge.coordinate.edgeYText,
 		);
 	}
 }

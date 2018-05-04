@@ -264,7 +264,7 @@ function drawOnCanvas(ctx, props) {
 		} else {
 			// console.error(x, y, rectWidth, rectHeight)
 			if (rectRadius) {
-				roundRect(ctx, x, y, rectWidth, rectHeight, 3);
+				roundRect(ctx, x, y, rectWidth, rectHeight, 6);
 			} else {
 				ctx.rect(x, y, rectWidth, rectHeight);
 			}
