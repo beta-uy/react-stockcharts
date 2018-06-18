@@ -29,6 +29,7 @@
 		"upgrade:patch": "npm version patch",
 		"preversion": "npm run lint",
 		"version": "node scripts/updateVersion.js && git add \"src/index.js\"",
+                "prepare": "npm run release",
 		"postversion":
 			"git push origin `git rev-parse --abbrev-ref HEAD` && git push origin `git describe`",
 		"npm:publish:next": "npm run release && cd build && npm publish --tag next",
